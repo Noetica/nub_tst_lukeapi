@@ -1,6 +1,6 @@
 # From the Youtbue video Github Actions and Octopus Deploy
 
-name: Build and create release
+name: test2 Build and create release
 
 on:
 #  push:
@@ -34,5 +34,5 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish
-      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj # --configuration {{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
+      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj --configuration {{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
 
