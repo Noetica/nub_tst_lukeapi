@@ -34,4 +34,5 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish
-      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj --configuration {{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
+      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj # --configuration {{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
+
