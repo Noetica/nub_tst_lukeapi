@@ -42,5 +42,15 @@ jobs:
         path: ${{ github.workspace }}\output\nub_tst_lukeapi\
         retention-days: 1
 
-    - name: Output artifact ID
-      run:  echo 'Artifact ID is ${{ steps.upload-artifact.outputs.artifact-id }}'
+  lukesDeploy:
+    runs-on: self-hosted
+    needs: lukesBuild
+    environment: dev
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: Luke test api artifact
+        path: .\theartifact
+        
