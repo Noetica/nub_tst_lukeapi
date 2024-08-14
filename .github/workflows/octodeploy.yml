@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: 
+    - uses: OctopusDeploy/install-octopus-cli-action@v3.0.0
 
     # Install the .NET Core workload
     - name: Install .NET Core
