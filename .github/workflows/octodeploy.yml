@@ -37,5 +37,5 @@ jobs:
       run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
 
     - name: Octopack
-      run: octo pack --id=nub_tst_lukeapi --format=Zip --version=1.${{ github.run_number }} --basePath=${{ github.workspace }}\output\nub_tst_lukeapi\
+      run: octo pack --id=nub_tst_lukeapi --format=Zip --version=1.${{ github.run_number }} --basePath=${{ github.workspace }}\output\nub_tst_lukeapi\ --output ${{ github.workspace }}\output
       
