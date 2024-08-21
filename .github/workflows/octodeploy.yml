@@ -38,4 +38,26 @@ jobs:
 
     - name: Octopus pack
       run: octopus package zip create --id=nub_tst_lukeapi --version=1.${{ github.run_number }} --base-path=${{ github.workspace }}\output\nub_tst_lukeapi\ --out-folder ${{ github.workspace }}\output
-      
+
+    - name: Octopus Upload
+      run: octopus package upload --package output\nub_tst_lukeapi1.${{ github.run_number }}.zip --space Nubisys --overwrite-mode overwrite
+
+    - name: Octopus Create Release
+      uses: OctopusDeploy/create-release-action@v3.0.5
+      with:
+        # The name of the project associated with this release.
+        project: Luke Test Project see nub_tst_lukeapi
+        # The number for the new release. If omitted, Octopus Deploy will generate a release number.
+        release_number: 1.${{ github.run_number }}
+        # The name of the channel to use for the new release. If omitted, the best channel will be selected based on channel version rules.
+        # Ignore existing releases if present in Octopus Deploy with the matching version number.
+        ignore_existing: true
+        # The release notes text associated with the new release (Markdown is supported).
+        release_notes: My Lovely Release Note
+        # The instance URL hosting Octopus Deploy (i.e. "https://octopus.example.com/"). The instance URL is required, but you may also use the OCTOPUS_URL environment variable.
+        server: ${{ OCTOPUS_URL }}
+        # The API key used to access Octopus Deploy. An API key is required, but you may also use the OCTOPUS_API_KEY environment variable. It is strongly recommended that this value retrieved from a GitHub secret.
+        api_key: ${{ OCTOPUS_API_KEY }}
+        # The name of a space within which this command will be executed. The space name is required, but you may also use the OCTOPUS_SPACE environment variable.
+        space: Nubisys
+  
