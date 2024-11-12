@@ -27,6 +27,10 @@ namespace nub_tst_lukeapi
 
             // app.UseAuthorization();
 
+            // Now is the time for all good men to come to the aid of the party Nude on ?123 
+            // 
+            // 
+
             var summaries = new[]
             {
                 "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
