@@ -1,6 +1,6 @@
 # From the Youtbue video Github Actions and Octopus Deploy
 
-name: Build and create release
+name: test2 Build and create release
 
 on:
 #  push:
@@ -16,12 +16,10 @@ env:
 
 jobs:
   lukesBuild:
-    runs-on: windows-latest  # For a list of available runner types, refer to
+    runs-on: self-hosted  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     steps:
     - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     # Install the .NET Core workload
     - name: Install .NET Core
@@ -34,5 +32,25 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish
-      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj # --configuration {{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
+      run: dotnet publish ${{ github.workspace }}\nub_tst_lukeapi.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}\output\nub_tst_lukeapi\
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.6
+      id: upload-artifact
+      with:
+        name: Luke test api artifact
+        path: ${{ github.workspace }}\output\nub_tst_lukeapi\
+        retention-days: 1
 
+  lukesDeploy:
+    runs-on: self-hosted
+    needs: lukesBuild
+    environment: dev
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: Luke test api artifact
+        path: .\theartifact
+        
